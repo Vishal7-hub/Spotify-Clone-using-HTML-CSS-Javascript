@@ -256,7 +256,7 @@ flex-wrap: wrap;
 }
 
 .seekbar{
-    height: 2px;
+    height: 6%;
     width: 98%;
     /* border: 2px solid rgb(17, 17, 17); */
     background-color: black;
@@ -264,6 +264,7 @@ flex-wrap: wrap;
     bottom: 0;
     border-radius: 10px;
     margin: 6px;
+    cursor: pointer;
 
 
 }
@@ -277,5 +278,18 @@ flex-wrap: wrap;
     left: 0%;
     transition: left 0.5s;
 
+}
+
+.songbuttons img{
+    cursor: pointer;
+}
+
+.songinfo, .songtime{
+    color: black;
+    padding: 0 12px;
+}
+.abovebar{
+    display: flex;
+    justify-content: space-between;
 }
 

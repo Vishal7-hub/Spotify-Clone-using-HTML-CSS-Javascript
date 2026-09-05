@@ -87,6 +87,8 @@
 // }
 // main();
 
+let currentsong = new Audio()
+
 
 
 async function getsongs() {
@@ -114,13 +116,23 @@ async function getsongs() {
 }
 
 // Pass the exact filename to the correct folder path (/songs/)
-const playMusic = (track) => {
-  let audio = new Audio("/songs/" + track);
-  audio.play();
+const playMusic = (track , pause=false) => {
+  // let audio = new Audio("/songs/" + track);
+  currentsong.src = "/songs/" + track
+  if(!pause){
+  currentsong.play();
+ 
+  play.src="paused.svg"
+  }
+  let cleanTrack = decodeURIComponent(track)
+  document.querySelector(".songinfo").innerHTML=cleanTrack;
+  
+  document.querySelector(".songtime").innerHTML="00:00/00:00";
 };
 
 async function main() {
   let songs = await getsongs();
+  playMusic(songs[0],true)
 
   let songUL = document.querySelector(".songlist").getElementsByTagName("ul")[0];
   songUL.innerHTML = ""; // Clear existing items
@@ -148,8 +160,62 @@ async function main() {
     e.addEventListener("click", () => {
       let track = e.dataset.song;
       playMusic(track);
+      
     });
   });
+
+
+
+  function secondsToMinutesSeconds(seconds) {
+    if (isNaN(seconds) || seconds < 0) {
+        return "00:00";
+    }
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+
+  //Attach an eventlistener to play,next and previous
+
+  play.addEventListener("click" ,()=>{
+    if(currentsong.paused){
+      currentsong.play()
+      play.src="paused.svg"
+    }
+    else{
+      currentsong.pause()
+      play.src="play.svg"
+
+    }
+
+  })
+
+  //listen for timeupdate event
+
+  currentsong.addEventListener("timeupdate",()=>{
+    document.querySelector(".songtime").innerHTML=`${secondsToMinutesSeconds(currentsong.currentTime)}:${secondsToMinutesSeconds(currentsong.duration)}`
+    document.querySelector(".circle").style.left = (currentsong.currentTime/currentsong.duration)*100 + "%"
+
+  })
+
+  //add an eventlistener to seekbar
+
+  document.querySelector(".seekbar").addEventListener("click", e=>{
+    let percent = (e.offsetX/e.target.getBoundingClientRect().width)*100
+    document.querySelector(".circle").style.left=percent  +"%"
+    currentsong.currentTime = (currentsong.duration)*percent/100
+
+
+
+  })
+
+
 }
 
 main();
