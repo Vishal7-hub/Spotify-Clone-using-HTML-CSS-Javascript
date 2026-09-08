@@ -20,6 +20,7 @@ body{
 .left{
     width: 30vw;
     padding: 10px;
+    position: relative;
 }
 .right{
     width:75vw;
@@ -279,6 +280,17 @@ flex-wrap: wrap;
     transition: left 0.5s;
 
 }
+.hamburger{
+    display: none;
+}
+
+.hamburgercont{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        gap: 14px;
+        
+    }
 
 .songbuttons img{
     cursor: pointer;
@@ -292,4 +304,59 @@ flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
 }
+
+.left .close{
+            display: none;
+
+}
+
+
+
+@media(max-width:1304px)
+{
+    .left{
+        /* background-color: red; */
+        position: absolute;
+        left: -100%;
+        z-index: 100;
+        transition: all .3s;
+        width: 433px;
+
+
+    }
+
+    .left .close{
+        position: absolute;
+        right: 31px;
+        top: 25px;
+        width: 29px;
+        z-index:101;
+        cursor:pointer;
+        display: block;
+
+    }
+    .right{
+        width: 100vw;
+
+    }
+   .playbar {
+        width: 95vw;
+        left: 2.5vw; /* FIX: Centers playbar on screen */
+    }
+
+    .hamburger{
+        display: block;
+    }
+   
+
+   
+}
+    
+
+
+
+
+ 
+
+
 

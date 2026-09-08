@@ -215,6 +215,21 @@ async function main() {
 
   })
 
+  // Add an eventlistener for hamburger
+  document.querySelector(".hamburger").addEventListener("click",()=>{
+    // console.log("hamclick")
+    document.querySelector(".left").style.left="0"
+
+  })
+
+  //Add an eventlistener for close button
+
+  document.querySelector(".close").addEventListener("click",()=>{
+    console.log("clicked")
+    document.querySelector(".left").style.left="-100%"
+
+  })
+
 
 }
 
