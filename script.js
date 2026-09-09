@@ -225,8 +225,8 @@ async function main() {
   //Add an eventlistener for close button
 
   document.querySelector(".close").addEventListener("click",()=>{
-    console.log("clicked")
-    document.querySelector(".left").style.left="-100%"
+    // console.log("clicked")
+    document.querySelector(".left").style.left="-110%"
 
   })
 
