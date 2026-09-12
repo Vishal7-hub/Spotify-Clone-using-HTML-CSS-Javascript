@@ -88,6 +88,7 @@
 // main();
 
 let currentsong = new Audio()
+let songs;
 
 
 
@@ -131,7 +132,7 @@ const playMusic = (track , pause=false) => {
 };
 
 async function main() {
-  let songs = await getsongs();
+  songs = await getsongs();
   playMusic(songs[0],true)
 
   let songUL = document.querySelector(".songlist").getElementsByTagName("ul")[0];
@@ -199,8 +200,8 @@ async function main() {
   //listen for timeupdate event
 
   currentsong.addEventListener("timeupdate",()=>{
-    document.querySelector(".songtime").innerHTML=`${secondsToMinutesSeconds(currentsong.currentTime)}:${secondsToMinutesSeconds(currentsong.duration)}`
-    document.querySelector(".circle").style.left = (currentsong.currentTime/currentsong.duration)*100 + "%"
+    document.querySelector(".songtime").innerHTML=`${secondsToMinutesSeconds(currentsong.currentTime)} / ${secondsToMinutesSeconds(currentsong.duration)}`
+    document.querySelector(".circle").style.left = (currentsong.currentTime/currentsong.duration)*100 +"%"
 
   })
 
@@ -208,7 +209,7 @@ async function main() {
 
   document.querySelector(".seekbar").addEventListener("click", e=>{
     let percent = (e.offsetX/e.target.getBoundingClientRect().width)*100
-    document.querySelector(".circle").style.left=percent  +"%"
+    document.querySelector(".circle").style.left=percent+"%"
     currentsong.currentTime = (currentsong.duration)*percent/100
 
 
@@ -230,6 +231,35 @@ async function main() {
 
   })
 
+  //Add an eventlistener in prev and next
+
+  previous.addEventListener("click",()=>
+  {
+    let index = songs.indexOf(    currentsong.src.split("/").slice(-1)[0]
+)
+    if(index-1 > 0){
+    playMusic(songs[index-1])
+    }
+
+    
+  })
+  
+   next.addEventListener("click",()=>
+  {
+    // console.log("next clicked")
+    let index = songs.indexOf(    currentsong.src.split("/").slice(-1)[0]
+)
+    if(index+1 < songs.length){
+    playMusic(songs[index+1])
+    }
+  })
+
+  //addd an event to volume
+  document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change",(e)=>{
+    // console.log("setting volume to",e,e.target,e.target.value."/100")
+    currentsong.volume=parseInt(e.target.value)/100
+
+  })
 
 }
 

@@ -98,6 +98,10 @@ body{
 .spotify-playlists{
     padding: 16px;
 }
+
+.spotify-playlists h1{
+    padding: 16px;
+}
 .cardcontainer{
     margin: 30px;
     display: flex;
@@ -299,9 +303,23 @@ flex-wrap: wrap;
     cursor: pointer;
 }
 
-.songinfo, .songtime{
+.songinfo{
     color: black;
     padding: 0 12px;
+    width: 250px;
+}
+
+.songtime{
+    width: 125px;
+    color: black;
+    padding: 0 12px;
+}
+
+.timevol{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
 }
 .abovebar{
     display: flex;
@@ -312,6 +330,18 @@ flex-wrap: wrap;
 .close{
             display: none;
 
+}
+
+.range{
+
+}
+
+
+.volume{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
 
@@ -326,6 +356,7 @@ flex-wrap: wrap;
         z-index: 100;
         transition: all .3s;
         width: 380px;
+        padding: 0;
 
 
     }
@@ -384,6 +415,22 @@ flex-wrap: wrap;
         flex-direction: column;
         gap: 23px;
         align-items: center;
+    }
+    .songinfo, .songtime{
+        width: auto;
+    }
+
+    .info div{
+        word-break: break-all;
+
+    }
+
+    .timevol{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        gap: 13px;
     }
 
    
